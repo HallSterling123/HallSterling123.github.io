@@ -6,7 +6,7 @@ body {
   #banner h1 {
     text-align: center;
     background-color:  #333;
-    color: white;
+    color: #fff;
     padding: 20px;
   }
   
@@ -43,11 +43,13 @@ body {
   }
   
   .about {
+    min-width: 200px;
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #f5d556;
+    background-color: #868686;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: .75;
     text-align: center;
   }
