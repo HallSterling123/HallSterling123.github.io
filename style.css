@@ -7,8 +7,8 @@ body {
   
   h1 {
     text-align: center;
-    background-color: #333;
-    color: #fff;
+    background-color: #fff;
+    color: #333;
   }
   
   nav {
@@ -26,7 +26,14 @@ body {
   }
   
   nav ul li {
-    margin: 0 15px;
+    margin: 0 20px;
+    border-color:#fff;
+    border-radius: 5px;
+  }
+
+  nav ul li:hover{
+    background-color: #f5d556;
+    border-radius: 5px;
   }
   
   nav ul li a {
@@ -37,6 +44,7 @@ body {
   
   nav ul li a:hover {
     text-decoration: underline;
+    color:beige;
   }
   
   .about {
