@@ -32,7 +32,7 @@ body {
 
   nav ul li:hover{
     background-color: darkgrey;
-    padding: 10px 20px;
+    padding: 0px 20px;
     border-radius: 2px;
   }
   
@@ -42,14 +42,14 @@ body {
     font-weight: bold;
   }
   
-  .about {
+  .about div{
     min-width: 200px;
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #868686;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     opacity: .75;
     text-align: center;
+    background-image: url('Sterling_ECEDay copy.jpeg');
   }

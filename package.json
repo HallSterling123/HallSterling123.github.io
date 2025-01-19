@@ -1,0 +1,25 @@
+{
+  "name": "hallsterling123.github.io",
+  "version": "1.0.0",
+  "description": "When you're ready, start your application by running: `docker compose up --build`.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HallSterling123/HallSterling123.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/HallSterling123/HallSterling123.github.io/issues"
+  },
+  "homepage": "https://github.com/HallSterling123/HallSterling123.github.io#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
