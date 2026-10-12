@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { site, timeline } from './content';
 import { WaveField } from './components/WaveField';
 import { SpacedTitle } from './components/SpacedTitle';
-import { WorkTunnel } from './components/WorkTunnel';
+import { ExperienceTimeline } from './components/ExperienceTimeline';
 import { Projects } from './components/Projects';
 import { Sequencer } from './components/Sequencer';
 import { WorkPage } from './pages/WorkPage';
@@ -154,7 +154,7 @@ export default function App() {
           </div>
         </section>
 
-        <WorkTunnel entries={timeline} />
+        <ExperienceTimeline entries={timeline} />
 
         <Projects projects={site.projects} />
 

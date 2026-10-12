@@ -684,6 +684,252 @@ input[type='text'], input[type='email'], textarea, [contenteditable='true'] { cu
   border: 0;
 }
 
+/* ---------- Experience timeline (horizontal) ---------- */
+.xp-timeline {
+  background: var(--signal);
+  color: var(--on-signal);
+  padding-block: clamp(3rem, 8vw, 5rem) 0;
+  overflow: hidden;
+}
+
+.xp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.xp-label {
+  background: var(--on-signal);
+  color: var(--signal);
+}
+
+.xp-nav-hint {
+  margin: 0;
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.xp-nav-keys {
+  font-size: 1rem;
+  letter-spacing: 0;
+  margin-right: 0.25rem;
+}
+
+/* Scroll container: hides scrollbar but allows touch/mouse drag */
+.xp-scroll {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+  padding-inline: var(--gutter);
+}
+.xp-scroll::-webkit-scrollbar { display: none; }
+
+/* Inner wrapper: sized to the card content so the bar dots stay aligned */
+.xp-inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  width: max-content;
+  min-width: 100%;
+}
+
+.xp-cards {
+  display: flex;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.xp-item {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(16rem, 28vw, 22rem);
+  /* Transition for the active highlight scale */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.xp-item.is-active {
+  transform: translateY(-6px);
+}
+
+/* Invisible button overlay so clicking the card area selects without navigating */
+.xp-select {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.xp-card {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--on-signal);
+  color: var(--signal);
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  z-index: 0;
+  height: 100%;
+}
+
+.xp-item.is-active .xp-card {
+  border-color: var(--on-signal);
+  box-shadow: 0 0 0 3px var(--ink);
+}
+
+.xp-card:hover, .xp-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ink);
+}
+
+.xp-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.xp-period {
+  background: var(--signal);
+  color: var(--on-signal);
+  font-size: 0.65rem;
+}
+
+.xp-kind {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--plum);
+}
+
+.xp-card-title {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.xp-card-meta {
+  display: block;
+  font-style: italic;
+  color: var(--plum);
+  font-size: 0.9375rem;
+}
+
+.xp-card-blurb {
+  display: block;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.xp-card-open {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid currentColor;
+  justify-self: start;
+}
+.xp-card-open::after { content: ' \2197'; }
+
+/* Timeline bar: sits below the cards, same width as the cards row */
+.xp-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.xp-bar-line {
+  position: absolute;
+  top: 7px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: color-mix(in srgb, var(--on-signal) 30%, transparent);
+}
+
+.xp-dot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  /* Match the card width so dots sit under their card */
+  flex: 0 0 clamp(16rem, 28vw, 22rem);
+  transition: color 0.2s ease;
+}
+
+.xp-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--on-signal);
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.xp-dot-wrap.is-active .xp-dot {
+  background: var(--on-signal);
+  transform: scale(1.3);
+}
+
+.xp-dot-label {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.xp-dot-wrap.is-active .xp-dot-label {
+  opacity: 1;
+}
+
+.xp-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--on-signal) 20%, transparent);
+  margin: 0;
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--on-signal) 70%, transparent);
+}
+
+@media (max-width: 640px) {
+  .xp-item { width: clamp(14rem, 72vw, 20rem); }
+  .xp-dot-wrap { flex: 0 0 clamp(14rem, 72vw, 20rem); }
+}
+
 /* ---------- Projects ---------- */
 .projects {
   display: grid;
