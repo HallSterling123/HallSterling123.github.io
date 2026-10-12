@@ -125,5 +125,27 @@ export const site = {
       ],
       highlights: ['Targeted the MLSB workshop at NeurIPS', 'An honest null result, reported as one'],
     },
+    {
+      slug: 'ma-covid',
+      cat: 'STR-005',
+      title: 'Massachusetts COVID-19, wave one',
+      kind: 'Side project',
+      role: 'Designer and developer',
+      blurb: 'An interactive data story on how distance to care shaped who survived the first wave of COVID-19 in Massachusetts.',
+      stack: ['React', 'D3', 'TopoJSON', 'Python'],
+      body: [
+        'Where you lived decided your odds. This scrolling data story follows 9,106 synthetic COVID-19 patients across all 14 Massachusetts counties from January 20 to March 30, 2020, using Synthea\u2122 synthetic health records.',
+        'It runs in three parts. An animated flow map draws every patient visit as an arc from home to provider, showing that routine care reached almost everyone while intensive care sat in a narrow corridor. The second part ties travel distance to survival, and the third maps the conditions patients already had before the pandemic arrived. Python scripts turn about 2.9 million rows of raw CSV data into compact JSON for the browser.',
+      ],
+      highlights: [
+        'Animated home-to-provider flow map of every visit',
+        'Hexbin maps, a chord diagram and a body map of comorbidities',
+        'Explore pages for demographics, conditions, medications, vitals and payers',
+      ],
+      links: [
+        { label: 'View the project', href: 'https://hallsterling123.github.io/ma-covid-viz/' },
+        { label: 'Source code', href: 'https://github.com/HallSterling123/ma-covid-viz' },
+      ],
+    },
   ] satisfies Release[],
 };
