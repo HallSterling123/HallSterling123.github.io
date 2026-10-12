@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import type { Release } from '../content';
+import type { Entry } from '../content';
 
 /**
  * A tall section with a pinned blue panel. Scrolling flies the camera through the
@@ -7,13 +7,15 @@ import type { Release } from '../content';
  * (no React re-render per scroll event), and depth stays well inside the perspective
  * distance so cards never cross the camera plane and vanish.
  */
-export function WorkTunnel({ releases }: { releases: Release[] }) {
+export function WorkTunnel({ entries }: { entries: Entry[] }) {
   const sec = useRef<HTMLElement>(null);
   const cards = useRef<(HTMLAnchorElement | null)[]>([]);
   const count = useRef<HTMLSpanElement>(null);
   const bar = useRef<HTMLSpanElement>(null);
   const [still, setStill] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const n = releases.length;
+  const n = entries.length;
+  const years = entries.map((e) => (e.start ?? '').slice(0, 4));
+  const yearRef = useRef<HTMLSpanElement>(null);
   const SPAN = n - 1; // camera travel, in cards
 
   useEffect(() => {
@@ -59,6 +61,7 @@ export function WorkTunnel({ releases }: { releases: Release[] }) {
       const active = Math.min(n - 1, Math.max(0, Math.round(pos)));
       if (active !== lastActive && count.current) {
         count.current.textContent = `${String(active + 1).padStart(2, '0')}/${String(n).padStart(2, '0')}`;
+        if (yearRef.current) yearRef.current.textContent = years[active] || '';
         lastActive = active;
       }
       if (bar.current) bar.current.style.transform = `scaleY(${p.toFixed(4)})`;
@@ -115,12 +118,11 @@ export function WorkTunnel({ releases }: { releases: Release[] }) {
       aria-labelledby="work-title"
     >
       <div className="tunnel-pin">
-        <h2 id="work-title" className="tunnel-bg spaced" aria-label="Work">
-          {[...'WORK'].map((c, i) => <span key={i} aria-hidden="true">{c}</span>)}
-        </h2>
+        <h2 id="work-title" className="sr-only">Experience</h2>
+        <p className="tunnel-bg" aria-hidden="true"><span ref={yearRef}>{years[0]}</span></p>
 
         <ol className="tunnel-scene">
-          {releases.map((r, i) => (
+          {entries.map((r, i) => (
             <li key={r.slug}>
               <a
                 ref={(el) => { cards.current[i] = el; }}
@@ -129,13 +131,13 @@ export function WorkTunnel({ releases }: { releases: Release[] }) {
                 onFocus={() => focusCard(i)}
               >
                 <span className="card-top">
-                  <span className="card-cat tag">#{r.cat}</span>
+                  <span className="card-cat tag">{r.period}</span>
                   <span className="card-kind">{r.kind}</span>
                 </span>
                 <span className="card-title">{r.title}</span>
-                <span className="card-meta">{r.role}</span>
+                <span className="card-meta">{r.role}{r.place ? `, ${r.place}` : ''}</span>
                 <span className="card-blurb">{r.blurb}</span>
-                <span className="card-open">View project</span>
+                <span className="card-open">Read more</span>
               </a>
             </li>
           ))}
@@ -143,7 +145,7 @@ export function WorkTunnel({ releases }: { releases: Release[] }) {
 
         <p className="tunnel-hint" aria-hidden="true">
           <span ref={count}>01/{String(n).padStart(2, '0')}</span>
-          <span>Scroll to fly through</span>
+          <span>Scroll to move forward in time</span>
         </p>
         <div className="tunnel-bar" aria-hidden="true"><span ref={bar} /></div>
       </div>

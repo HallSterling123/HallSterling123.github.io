@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { site } from './content';
+import { site, timeline } from './content';
 import { WaveField } from './components/WaveField';
 import { SpacedTitle } from './components/SpacedTitle';
 import { WorkTunnel } from './components/WorkTunnel';
+import { Projects } from './components/Projects';
 import { Sequencer } from './components/Sequencer';
 import { WorkPage } from './pages/WorkPage';
 import { parse, useRoute } from './router';
@@ -98,7 +99,8 @@ export default function App() {
         <a href="#top" className="bar-name">{site.name}</a>
         <nav className="bar-nav" aria-label="Sections">
           <a href="#about">About</a>
-          <a href="#work" aria-current={route.page === 'work' ? 'page' : undefined}>Work</a>
+          <a href="#work">Experience</a>
+          <a href="#projects">Projects</a>
           <a href="#contact" aria-current={route.page === 'contact' ? 'page' : undefined}>Contact</a>
           <a href="#sound" className="bar-sound" aria-current={route.page === 'sound' ? 'page' : undefined}>
             <span className="bar-sound-led" aria-hidden="true" />Sound
@@ -152,7 +154,9 @@ export default function App() {
           </div>
         </section>
 
-        <WorkTunnel releases={site.releases} />
+        <WorkTunnel entries={timeline} />
+
+        <Projects projects={site.projects} />
 
         <section id="leap" className="leap" aria-label="Contact">
           <Wormhole href="#contact" kicker={site.leap.kicker} title={site.leap.title} />
