@@ -36,8 +36,20 @@ export function WorkTunnel({ entries }: { entries: Entry[] }) {
       target = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
     };
 
+    // Each card holds still in front of the camera for the first HOLD share of its stretch
+    // of scroll, then glides to the next one. The last card gets a hold of its own.
+    const HOLD = 0.55;
+    const hold = (p: number) => {
+      const seg = Math.min(SPAN, p * (SPAN + HOLD));
+      const i = Math.floor(seg);
+      const f = seg - i;
+      if (i >= SPAN || f <= HOLD) return Math.min(i, SPAN);
+      const t = (f - HOLD) / (1 - HOLD);
+      return i + t * t * (3 - 2 * t);
+    };
+
     const apply = (p: number) => {
-      const pos = p * SPAN;
+      const pos = hold(p);
       for (let i = 0; i < n; i++) {
         const c = cards.current[i];
         if (!c) continue;
@@ -106,7 +118,7 @@ export function WorkTunnel({ entries }: { entries: Entry[] }) {
     if (still || !el) return;
     const top = el.getBoundingClientRect().top + window.scrollY;
     const total = el.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: top + (SPAN > 0 ? (i / SPAN) * total : 0), behavior: 'auto' });
+    window.scrollTo({ top: top + (SPAN > 0 ? ((i + 0.25) / (SPAN + 0.55)) * total : 0), behavior: 'auto' });
   };
 
   return (

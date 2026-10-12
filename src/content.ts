@@ -20,7 +20,9 @@ export type Entry = {
   /** Detail page: a few paragraphs, then a short list of highlights. */
   body: string[];
   highlights?: string[];
-  /** Outbound links shown on the detail page. */
+  /** Résumé points, shown on the detail page under "What I did". */
+  bullets?: string[];
+  /** Links shown on the detail page. Outside sites open in a new tab; '#work-…' links stay on the site. */
   links?: { label: string; href: string }[];
 };
 
@@ -67,7 +69,7 @@ export const site = {
 
   // "Now playing": what you're doing at the moment.
   now: [
-    { what: 'Security Analyst', where: 'Aegis AI', detail: 'Email threat data for model training, IOC rulings on malicious domains, rules-based threat detection.' },
+    { what: 'Security Analyst', where: 'AegisAI', detail: 'Email threat data for model training, IOC rulings on malicious domains, rules-based threat detection.' },
   ],
 
   // The work tunnel. Any order here; the site sorts by `start`, oldest first, so the camera flies toward now.
@@ -82,12 +84,15 @@ export const site = {
       place: 'Princeton, NJ',
       blurb: 'Undergraduate engineering, ending in a thesis on private, secure machine learning for healthcare.',
       body: [
-        'I studied electrical and computer engineering, with most of my time going to machine learning, embedded systems and security.',
-        'My senior thesis, GRU-SFL, designed a split federated learning architecture with GRU models so healthcare models could learn from patient time-series data without pooling it in one place.',
+        'I studied electrical and computer engineering, spending most of my time on machine learning, embedded systems and security, and wrote my senior thesis on private, secure machine learning for healthcare.',
       ],
-      highlights: [
-        'Thesis: GRU-SFL, a private, secure, efficient ML architecture for healthcare',
-        'Officer, Engineers Without Borders: led a 7-person team designing a pipeline addition to serve 1,500+ people, simulated in EPANET',
+      bullets: [
+        'Thesis: GRU-SFL: A Private, Secure, Efficient Machine Learning Architecture for Healthcare; designed a split federated learning architecture with GRU models for privacy-preserving healthcare ML',
+        'Officer, Engineers Without Borders (Sep 2021 – May 2025): led a 7-member team designing and simulating a pipeline addition to serve 1,500+ community members using EPANET, with professional advisors and MIWASCO',
+      ],
+      links: [
+        { label: 'Read about the thesis', href: '#work-gru-sfl' },
+        { label: 'Princeton ECE', href: 'https://ece.princeton.edu/' },
       ],
     },
     {
@@ -101,10 +106,13 @@ export const site = {
       blurb: 'Real-time vitals alerts for rescue crews wearing AR headsets.',
       stack: ['MQTT', 'Kotlin', 'Android', 'Vuzix HUD'],
       body: [
-        'I built the messaging layer for an augmented-reality system used in rescue operations, where the headsets have little compute and every millisecond counts.',
-        'A lightweight MQTT network lets responders subscribe to the vitals that matter and get notified the moment a reading crosses a critical threshold. I also wrote the Android app, in Kotlin with Vuzix HUD packages, that shows biometrics and rescue information side by side.',
+        'At the CoNSeRT Lab at the University of West Attica, I built the messaging and mobile software for an augmented-reality system used in rescue operations, where the headsets have little compute and every millisecond counts.',
       ],
-      highlights: ['250 ms end-to-end alert latency', 'Secure, subscription-based notifications for critical vitals'],
+      bullets: [
+        'Engineered a lightweight MQTT messaging network for a resource-constrained AR environment, creating a secure subscription-based notification system for critical vitals thresholds with 250ms end-to-end latency',
+        'Developed an Android application in Kotlin using Vuzix HUD packages for simultaneous biometrics monitoring and rescue operations',
+      ],
+      links: [{ label: 'CoNSeRT Lab', href: 'https://consert.eee.uniwa.gr/' }],
     },
     {
       slug: 'teaching',
@@ -116,10 +124,13 @@ export const site = {
       place: 'Princeton, NJ',
       blurb: 'Labs and tutorials in circuits, logic design and drone control for 75+ students.',
       body: [
-        'Across three courses I ran labs and tutorials on circuit design, computer logic design and drone robotics control.',
-        'I also wrote supplementary materials and evaluated students\' autonomous navigation projects and circuit builds.',
+        'Across three Princeton ECE courses I taught the hands-on side of engineering: circuits, logic design and drone control.',
       ],
-      highlights: ['75+ students across three courses'],
+      bullets: [
+        'Led labs and tutorials in circuit design, computer logic design, and drone robotics control for 75+ students across three courses',
+        'Developed supplementary materials and evaluated autonomous navigation projects and circuit implementations',
+      ],
+      links: [{ label: 'Princeton ECE', href: 'https://ece.princeton.edu/' }],
     },
     {
       slug: 'eir',
@@ -132,13 +143,18 @@ export const site = {
       blurb: 'AI sports analytics for female athletes, from the wearable to the models to the app.',
       stack: ['LLM fine-tuning', 'LSTM', 'React Native', 'TypeScript', 'Supabase'],
       body: [
-        'I co-founded eir to build sports analytics for female athletes, a group most performance tools ignore. We raised pre-seed funding from several sources and partnered with USA Rowing to validate the platform through athlete trials.',
-        'On the technical side I fine-tuned an LLM with supervised fine-tuning and QLoRA on a curated dataset, built an LSTM that predicts menstrual-cycle symptoms and performance trends from biosignal data, and led the design of a chest-worn wearable based on the Polar H10. I also built the mobile and web apps in React Native, TypeScript and Supabase.',
+        'I co-founded eir to build sports analytics for female athletes, a group most performance tools ignore. The platform pairs a chest-worn wearable with models that track training load, readiness and cycle-related symptoms, and gives coaches a team-wide view.',
       ],
-      highlights: [
-        'Pre-seed funding and a USA Rowing partnership',
-        'Wearable matched market alternatives on accuracy, with better comfort in trials',
-        'Selected for the Keller Center eLab Summer Accelerator, 2024',
+      bullets: [
+        'Founded an AI sports analytics company for female athletes; raised pre-seed funding from multiple sources and established a partnership with USA Rowing to validate the platform through athlete trials',
+        'Fine-tuned an LLM with Supervised Fine-Tuning (SFT) and QLoRA on a curated dataset, and built an LSTM neural network to predict menstrual cycle symptoms and performance trends from biosignal data',
+        'Led design and rapid prototyping of a chest-worn wearable based on Polar H10; trials showed increased comfort and equivalent accuracy to established market alternatives',
+        'Built mobile and web applications using React Native, TypeScript, and Supabase',
+        'Selected for Keller Center\u2019s eLab Summer Accelerator program (Summer 2024)',
+      ],
+      links: [
+        { label: 'eir at the Keller Center', href: 'https://kellercenter.princeton.edu/people/startups-teams/eir-formerly-luna' },
+        { label: 'USA Rowing', href: 'https://usrowing.org/' },
       ],
     },
     {
@@ -152,13 +168,13 @@ export const site = {
       blurb: 'Zero-to-one financing software helping U.S. manufacturers access flexible capital.',
       stack: ['React', 'NestJS', 'Prisma', 'AWS Cognito', 'Zustand'],
       body: [
-        'I led 0-to-1 development of two production applications, credit modules and three customizable demo platforms, in a NestJS, Prisma and React monorepo.',
-        'I designed the Prisma schemas and NestJS endpoints that let the apps share data securely, and built the React side: applicant forms validated with react-hook-form and Zod, digital signatures, and a shared UI kit. I also handled AWS Cognito authentication and schema migrations.',
+        'Substrate is an embedded equipment-financing platform for industrial vendors. I worked across its NestJS, Prisma and React monorepo, from database schemas to the screens applicants fill in.',
       ],
-      highlights: [
-        'Helped U.S. manufacturers access $15M+ in flexible financing across 8 early customers',
-        'Shared components: DataTable, SearchAndFilter, RangeSlider, StepProgress',
+      bullets: [
+        'Led 0-to-1 development of two production applications, credit modules, and three customizable demo platforms helping U.S. manufacturers access $15M+ in flexible financing across 8 early customers',
+        'Designed Prisma backend schemas and NestJS endpoints for secure inter-app data sharing, and built React UI components across the platform',
       ],
+      links: [{ label: 'Substrate', href: 'https://joinsubstrate.com/' }],
     },
     {
       slug: 'princeton-ms',
@@ -170,14 +186,21 @@ export const site = {
       place: 'Princeton, NJ',
       blurb: 'Graduate work in machine learning for medicine and biology.',
       body: [
-        'My master\'s coursework covered reinforcement learning theory, computational biology, molecular modeling methods and computer security.',
-        'My research applied deep learning to medical imaging and protein design. Both projects are listed under Projects.',
+        'My master\'s work applied machine learning to medicine and biology, alongside coursework in reinforcement learning and security.',
       ],
-      highlights: ['Automated DTCA measurement from ankle X-rays', 'Uncertainty-aware inverse folding'],
+      bullets: [
+        'Relevant coursework: Reinforcement Learning Theory, Computational Biology, Molecular Modeling Methods, Computer Security',
+        'Research: automated DTCA measurement from ankle X-rays, and uncertainty-aware inverse folding for protein design',
+      ],
+      links: [
+        { label: 'DTCA measurement', href: '#work-dtca' },
+        { label: 'Inverse folding', href: '#work-inverse-folding' },
+        { label: 'Princeton ECE', href: 'https://ece.princeton.edu/' },
+      ],
     },
     {
       slug: 'aegis',
-      title: 'Aegis AI',
+      title: 'AegisAI',
       role: 'Security Analyst',
       kind: 'Role',
       period: 'Sep 2026 – Present',
@@ -185,10 +208,14 @@ export const site = {
       place: 'New York, NY',
       blurb: 'Labeled threat data and detection rules for ML-based email security.',
       body: [
-        'I build the labeled datasets that train Aegis AI\'s email threat detection models, and issue indicator-of-compromise rulings on suspicious and malicious domains.',
-        'When I find a pattern worth catching every time, I turn it into rules-based detection logic that backs up the models.',
+        'AegisAI builds agentic email security for Microsoft 365 and Google Workspace. I work on the data and rules behind its threat detection.',
       ],
-      highlights: ['5,000+ emails a week at 99.7% accuracy'],
+      bullets: [
+        'Annotate 5,000+ emails per week with 99.7% accuracy, building labeled training datasets for ML-based email threat detection models',
+        'Issue indicator of compromise (IOC) rulings on suspicious and malicious domains to support threat intelligence and email security',
+        'Integrate identified threat patterns into rules-based detection systems, complementing ML models with deterministic detection logic',
+      ],
+      links: [{ label: 'AegisAI', href: 'https://www.aegisai.com/' }],
     },
   ] satisfies Entry[],
 
@@ -215,6 +242,7 @@ export const site = {
       links: [
         { label: 'View the project', href: 'https://hallsterling123.github.io/ma-covid-viz/' },
         { label: 'Source code', href: 'https://github.com/HallSterling123/ma-covid-viz' },
+        { label: 'Synthea synthetic data', href: 'https://synthetichealth.github.io/synthea/' },
       ],
     },
     {
@@ -229,6 +257,7 @@ export const site = {
         'A multi-task U-Net finds the anatomy and the angle is computed from its output. Along the way I compared spatial configuration networks, stacked hourglass networks, EfficientNet-B0 and nnU-Net, building on earlier work that used weakly supervised landmark detection.',
       ],
       highlights: ['Mean absolute error of 2.15°', '12× better than the baseline', 'Written up as a paper'],
+      links: [{ label: 'Princeton MS', href: '#work-princeton-ms' }],
     },
     {
       slug: 'inverse-folding',
@@ -242,6 +271,10 @@ export const site = {
         'The headline result was negative. An ensemble approach lowered sequence recovery across the board instead of helping on flexible residues, and temperature scaling only matched the single-structure baseline. I rewrote the paper to report that plainly rather than bury it.',
       ],
       highlights: ['Targeted the MLSB workshop at NeurIPS', 'An honest null result, reported as one'],
+      links: [
+        { label: 'ProteinMPNN', href: 'https://github.com/dauparas/ProteinMPNN' },
+        { label: 'MLSB workshop', href: 'https://www.mlsb.io/' },
+      ],
     },
     {
       slug: 'gru-sfl',
@@ -255,6 +288,7 @@ export const site = {
         'The thesis designs the architecture and weighs it on privacy, security and efficiency.',
       ],
       highlights: ['Princeton BSE thesis in Electrical and Computer Engineering'],
+      links: [{ label: 'Princeton BSE', href: '#work-princeton-bse' }],
     },
   ] satisfies Project[],
 };

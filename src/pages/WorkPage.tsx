@@ -20,6 +20,9 @@ export function WorkPage({ slug }: { slug: string }) {
   const r = list[i];
   const prev = list[(i - 1 + list.length) % list.length];
   const next = list[(i + 1) % list.length];
+  const isExternal = (href: string) => /^https?:/.test(href);
+  const site0 = r.links?.find((l) => isExternal(l.href));
+  const linkProps = (href: string) => (isExternal(href) ? { target: '_blank', rel: 'noreferrer' } : {});
 
   return (
     <article className="detail" aria-labelledby="detail-title">
@@ -32,6 +35,9 @@ export function WorkPage({ slug }: { slug: string }) {
           </p>
           <h1 id="detail-title" className="detail-title">{r.title}</h1>
           <p className="detail-blurb">{r.blurb}</p>
+          {site0 && (
+            <a className="btn-out btn-inv" href={site0.href} target="_blank" rel="noreferrer">Visit {site0.label}</a>
+          )}
         </div>
       </header>
 
@@ -50,7 +56,11 @@ export function WorkPage({ slug }: { slug: string }) {
               <dt className="tag">Links</dt>
               <dd>
                 <ul className="detail-links">
-                  {r.links.map((l) => <li key={l.label}><a href={l.href} target="_blank" rel="noreferrer">{l.label}</a></li>)}
+                  {r.links.map((l) => (
+                    <li key={l.label}>
+                      <a href={l.href} className={isExternal(l.href) ? 'is-out' : undefined} {...linkProps(l.href)}>{l.label}</a>
+                    </li>
+                  ))}
                 </ul>
               </dd>
             </div>
@@ -59,6 +69,12 @@ export function WorkPage({ slug }: { slug: string }) {
 
         <div className="detail-text">
           {r.body.map((p, k) => <p key={k}>{p}</p>)}
+          {r.bullets && r.bullets.length > 0 && (
+            <>
+              <h2 className="tag">What I did</h2>
+              <ul className="highlights bullets">{r.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
+            </>
+          )}
           {r.highlights && r.highlights.length > 0 && (
             <>
               <h2 className="tag">Highlights</h2>
