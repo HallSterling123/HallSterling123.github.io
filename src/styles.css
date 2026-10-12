@@ -610,15 +610,36 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .is-leaving .veil { opacity: 1; pointer-events: auto; transition-duration: 0.5s; }
 
-/* ---------- Cursor: electric blue with a white outline ---------- */
-/* Arrow for everything, a ringed dot over anything clickable. The white outline keeps both
-   visible on the blue panels and in the inverted theme. Touch screens never show these. */
+/* ---------- Cursor ---------- */
+/* Default: blue filled dot, white outline.
+   Clickable: ringed dot (blue center, white ring) — unchanged.
+   Both invert with the Blue/White theme toggle. Touch screens never show these. */
+
+/* -- default theme (white ground, blue signal) -- */
 html {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M4 3 L4 22 L9 17.3 L12.4 24.6 L15.8 23.1 L12.5 15.9 L19.4 15.9 Z' fill='%231200FF' stroke='%23FFFFFF' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E") 4 3, auto;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='7' fill='%231200FF' stroke='%23FFFFFF' stroke-width='2.5'/%3E%3C/svg%3E") 10 10, auto;
 }
-a, button, label, summary, select, input[type='range'], input[type='checkbox'], .wormhole, .card {
+a, button, label, summary, select, input[type='range'], input[type='checkbox'], .wormhole, .card, .xp-card {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23FFFFFF' stroke-width='4'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%231200FF' stroke-width='1.8'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%231200FF' stroke='%23FFFFFF' stroke-width='1.5'/%3E%3C/svg%3E") 16 16, pointer;
 }
+
+/* -- inverted theme (blue ground, white signal) -- */
+html[data-contrast='blue'] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='7' fill='%23FFFFFF' stroke='%231200FF' stroke-width='2.5'/%3E%3C/svg%3E") 10 10, auto;
+}
+html[data-contrast='blue'] a,
+html[data-contrast='blue'] button,
+html[data-contrast='blue'] label,
+html[data-contrast='blue'] summary,
+html[data-contrast='blue'] select,
+html[data-contrast='blue'] input[type='range'],
+html[data-contrast='blue'] input[type='checkbox'],
+html[data-contrast='blue'] .wormhole,
+html[data-contrast='blue'] .card,
+html[data-contrast='blue'] .xp-card {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%231200FF' stroke-width='4'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23FFFFFF' stroke-width='1.8'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23FFFFFF' stroke='%231200FF' stroke-width='1.5'/%3E%3C/svg%3E") 16 16, pointer;
+}
+
 input[type='text'], input[type='email'], textarea, [contenteditable='true'] { cursor: text; }
 
 /* ---------- Résumé button ---------- */
