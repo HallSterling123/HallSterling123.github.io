@@ -143,9 +143,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
   position: relative;
   font-size: clamp(5rem, 24vw, 22rem);
   color: var(--signal);
-  padding-bottom: 0.5rem;
+  /* letters get a full 1em box so nothing is clipped; pull the row back down
+     so the name still sits tight against the bottom of the hero */
+  margin-bottom: -0.1em;
 }
-.ch { position: relative; display: inline-block; overflow: hidden; }
+.ch { position: relative; display: inline-block; overflow: hidden; line-height: 1; padding-top: 0.04em; }
 .ch-in { display: inline-block; transition: transform 0.5s cubic-bezier(0.7, 0, 0.2, 1); }
 .ch::after {
   content: attr(data-ch);
