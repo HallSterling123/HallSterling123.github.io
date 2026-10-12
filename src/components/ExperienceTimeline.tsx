@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Entry } from '../content';
 
 export function ExperienceTimeline({ entries }: { entries: Entry[] }) {
@@ -9,14 +9,9 @@ export function ExperienceTimeline({ entries }: { entries: Entry[] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const inViewRef = useRef(false);
 
-  const goto = useCallback(
-    (i: number) => {
-      const clamped = Math.max(0, Math.min(n - 1, i));
-      setActive(clamped);
-      cardRefs.current[clamped]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    },
-    [n],
-  );
+  const scrollTo = (i: number) => {
+    cardRefs.current[i]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  };
 
   // Arrow key navigation — only active while the section is on-screen.
   useEffect(() => {
@@ -26,14 +21,14 @@ export function ExperienceTimeline({ entries }: { entries: Entry[] }) {
         e.preventDefault();
         setActive((a) => {
           const next = Math.min(n - 1, a + 1);
-          cardRefs.current[next]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          scrollTo(next);
           return next;
         });
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         e.preventDefault();
         setActive((a) => {
           const next = Math.max(0, a - 1);
-          cardRefs.current[next]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          scrollTo(next);
           return next;
         });
       }
@@ -72,15 +67,12 @@ export function ExperienceTimeline({ entries }: { entries: Entry[] }) {
                 ref={(el) => { cardRefs.current[i] = el; }}
                 className={`xp-item${i === active ? ' is-active' : ''}`}
               >
-                {/* Clicking anywhere on the card area selects it */}
-                <button
-                  type="button"
-                  className="xp-select"
-                  aria-label={`Select ${r.title}`}
-                  tabIndex={-1}
-                  onClick={() => goto(i)}
-                />
-                <a className="xp-card" href={`#work-${r.slug}`}>
+                <a
+                  className="xp-card"
+                  href={`#work-${r.slug}`}
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => { setActive(i); scrollTo(i); }}
+                >
                   <span className="xp-card-top">
                     {r.period && <span className="tag xp-period">{r.period}</span>}
                     <span className="xp-kind">{r.kind}</span>
@@ -115,3 +107,4 @@ export function ExperienceTimeline({ entries }: { entries: Entry[] }) {
     </section>
   );
 }
+
