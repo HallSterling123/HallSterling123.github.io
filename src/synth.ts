@@ -86,6 +86,11 @@ export class SynthEngine {
 
   readonly queue: { step: number; time: number }[] = [];
 
+  /** Progressive layer gates — React sets these as the user advances steps. */
+  layerKick = false;
+  layerHats = false;
+  layerMelody = false;
+
   bpm = 128;
   drums: Record<DrumVoice, boolean[]> = {
     kick: makeRow([0, 4, 8, 12]),
@@ -111,7 +116,8 @@ export class SynthEngine {
     master.connect(comp).connect(ctx.destination);
 
     const dOut = ctx.createGain(); dOut.gain.value = 0.88; dOut.connect(master);
-    const mOut = ctx.createGain(); mOut.gain.value = 0.72; mOut.connect(master);
+    // Melody gain starts at 0 — enableMelody() fades it in
+    const mOut = ctx.createGain(); mOut.gain.value = 0; mOut.connect(master);
 
     const len = ctx.sampleRate;
     const buf = ctx.createBuffer(1, len, ctx.sampleRate);
@@ -125,6 +131,12 @@ export class SynthEngine {
   async start() {
     const ctx = this.boot();
     if (ctx.state === 'suspended') await ctx.resume();
+    // Set melody gain to match layer state (instant — no fade on restart)
+    if (this._melOut) {
+      const t = ctx.currentTime;
+      this._melOut.gain.cancelScheduledValues(t);
+      this._melOut.gain.setValueAtTime(this.layerMelody ? 0.72 : 0, t);
+    }
     this._step = 0;
     this._next = ctx.currentTime + 0.06;
     this.queue.length = 0;
@@ -137,6 +149,17 @@ export class SynthEngine {
     this._timer = null; this.queue.length = 0;
   }
 
+  /** Fade the melody layer in over ~2 seconds. Call when first activating the melody. */
+  enableMelody() {
+    this.layerMelody = true;
+    if (this._ctx && this._melOut) {
+      const t = this._ctx.currentTime;
+      this._melOut.gain.cancelScheduledValues(t);
+      this._melOut.gain.setValueAtTime(0, t);
+      this._melOut.gain.linearRampToValueAtTime(0.72, t + 2.0);
+    }
+  }
+
   private _schedule() {
     const ctx = this._ctx!;
     const s16 = 60 / this.bpm / 4;
@@ -144,14 +167,16 @@ export class SynthEngine {
       const swing = this._step % 2 === 1 ? s16 * 0.06 : 0;
       const t = this._next + swing;
 
-      if (this.drums.kick[this._step]) this._kick(t);
-      if (this.drums.hat[this._step])  this._hat(t);
-      if (this.drums.clap[this._step]) this._clap(t);
+      if (this.layerKick  && this.drums.kick[this._step]) this._kick(t);
+      if (this.layerHats  && this.drums.hat[this._step])  this._hat(t);
+      if (this.layerHats  && this.drums.clap[this._step]) this._clap(t);
 
-      const noteIdx = this.melody[this._step];
-      if (noteIdx !== null) {
-        const notes = buildScale(this.root, this.scale);
-        if (noteIdx < notes.length) this._note(notes[noteIdx].hz, t, s16 * 0.85);
+      if (this.layerMelody) {
+        const noteIdx = this.melody[this._step];
+        if (noteIdx !== null) {
+          const notes = buildScale(this.root, this.scale);
+          if (noteIdx < notes.length) this._note(notes[noteIdx].hz, t, s16 * 0.85);
+        }
       }
 
       this.queue.push({ step: this._step, time: t });
