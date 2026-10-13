@@ -4,7 +4,7 @@ import { WaveField } from './components/WaveField';
 import { SpacedTitle } from './components/SpacedTitle';
 import { ExperienceTimeline } from './components/ExperienceTimeline';
 import { Projects } from './components/Projects';
-import { Sequencer } from './components/Sequencer';
+import { SynthLab } from './components/SynthLab';
 import { WorkPage } from './pages/WorkPage';
 import { parse, useRoute } from './router';
 import { navigate } from './transition';
@@ -119,7 +119,7 @@ export default function App() {
       <main id="top" key={pageKey}>
         <ErrorBoundary resetKey={pageKey}>
         {route.page === 'work' && <WorkPage slug={route.slug} />}
-        {route.page === 'sound' && <Sequencer />}
+        {route.page === 'sound' && <SynthLab />}
         {route.page === 'contact' && <ContactPage />}
         {route.page === 'home' && (
           <>
