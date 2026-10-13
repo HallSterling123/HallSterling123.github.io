@@ -33,15 +33,15 @@ export const site = {
   name: 'Sterling',
   // Shown under the name in the hero.
   intro:
-    'Engineer and founder. I build applied machine learning systems and the software that ships them.',
-  base: 'New York and Princeton, NJ',
-  availability: 'Building from New York. Open to early-stage teams.',
-  heroTag: 'Engineer / Founder / Applied ML',
+    'ML and security engineer. I build systems at the intersection of machine learning, threat detection, and biomedical research.',
+  base: 'New York, NY',
+  availability: 'I build ML systems for security and medicine.',
+  heroTag: 'ML · Security · Biomedical',
 
   about: [
-    'I work where machine learning meets product. I co-founded eir, an AI sports analytics company for female athletes, and I hold a BSE and an MS in Electrical and Computer Engineering from Princeton.',
-    'My research has covered medical imaging and protein design. My day job is security: deciding which emails and domains are malicious, and turning those calls into training data.',
-    'I like small teams, hard problems, and owning the whole stack, from the model to the API to the screen someone actually touches.',
+    'I\'m a machine learning and security engineer. I co-founded eir, an AI sports analytics company, and hold a BSE and MS in Electrical and Computer Engineering from Princeton.',
+    'My research is in medical imaging and computational biology — automated measurement from ankle X-rays, uncertainty-aware protein design. My current work is in security: building labeled threat datasets, issuing IOC rulings on malicious domains, and integrating detection logic into production ML systems.',
+    'I\'m focused on applied ML for hard domains — security and biomedical systems, where the cost of being wrong is real and the data is messy. I own the full stack: model architecture to API to deployment.',
   ],
 
   marquee: "Let's build something loud",
@@ -49,9 +49,9 @@ export const site = {
   // The wormhole at the bottom of the home page, and the contact page it leads to.
   leap: { kicker: 'Ready to make the leap?', title: 'Click to connect' },
   contact: {
-    lede: 'Building something early and technical? Tell me about it.',
-    openTo: ['Founding and early engineering roles', 'Applied ML projects that need to ship', 'Research collaborations'],
-    replyTime: 'Usually within a couple of days.',
+    lede: 'I work on ML for security and biomedical systems. If your problem is in that space, reach out.',
+    openTo: ['Applied ML — security, threat detection, healthcare', 'Biomedical research and ML for biology', 'Security engineering roles with a strong ML component'],
+    replyTime: 'I read everything.',
   },
 
   // Your résumé lives at public/resume/Hall_Sterling.pdf. Replace that file to update it.
