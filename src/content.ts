@@ -35,13 +35,13 @@ export const site = {
   intro:
     'Engineer and founder. I build applied machine learning systems and the software that ships them.',
   base: 'New York and Princeton, NJ',
-  availability: 'Building from New York. Open to early-stage teams.',
-  heroTag: 'Engineer / Founder / Applied ML',
+  availability: 'Based in New York and open to new opportunities.',
+  heroTag: 'Machine learning, software and hardware',
 
   about: [
-    'I work where machine learning meets product. I co-founded eir, an AI sports analytics company for female athletes, and I hold a BSE and an MS in Electrical and Computer Engineering from Princeton.',
-    'My research has covered medical imaging and protein design. My day job is security: deciding which emails and domains are malicious, and turning those calls into training data.',
-    'I like small teams, hard problems, and owning the whole stack, from the model to the API to the screen someone actually touches.',
+    "I'm an engineer with a BSE and an MS in Electrical and Computer Engineering from Princeton. My work spans machine learning, full-stack software and hardware, and I've applied it in sports science, healthcare, finance and cybersecurity.",
+    "I co-founded eir, an AI sports analytics company for female athletes, and built everything from its wearable prototype to its models and apps. Since then I've shipped production financing software at Substrate and now work on AI-driven email threat detection at AegisAI.",
+    'Whatever the field, I take the same approach: understand the problem, build carefully, and deliver work that holds up in the real world.',
   ],
 
   marquee: "Let's build something loud",
@@ -49,9 +49,9 @@ export const site = {
   // The wormhole at the bottom of the home page, and the contact page it leads to.
   leap: { kicker: 'Ready to make the leap?', title: 'Click to connect' },
   contact: {
-    lede: 'Building something early and technical? Tell me about it.',
-    openTo: ['Founding and early engineering roles', 'Applied ML projects that need to ship', 'Research collaborations'],
-    replyTime: 'Usually within a couple of days.',
+    lede: "Have a project, a role or an idea in mind? I'd like to hear about it.",
+    openTo: ['Engineering and machine learning roles', 'New products and early-stage companies', 'Research and technical collaborations'],
+    replyTime: 'Usually within two business days.',
   },
 
   // Your résumé lives at public/resume/Hall_Sterling.pdf. Replace that file to update it.
@@ -69,7 +69,7 @@ export const site = {
 
   // "Now playing": what you're doing at the moment.
   now: [
-    { what: 'Security Analyst', where: 'AegisAI', detail: 'Email threat data for model training, IOC rulings on malicious domains, rules-based threat detection.' },
+    { what: 'Security Analyst', where: 'AegisAI', detail: 'Building the data and detection logic behind AI-driven email security.' },
   ],
 
   // The work tunnel. Any order here; the site sorts by `start`, oldest first, so the camera flies toward now.
@@ -82,9 +82,9 @@ export const site = {
       period: 'Sep 2021 – May 2025',
       start: '2021-09',
       place: 'Princeton, NJ',
-      blurb: 'Undergraduate engineering, ending in a thesis on private, secure machine learning for healthcare.',
+      blurb: 'Undergraduate degree in electrical and computer engineering, with a thesis on privacy-preserving machine learning for healthcare.',
       body: [
-        'I studied electrical and computer engineering, spending most of my time on machine learning, embedded systems and security, and wrote my senior thesis on private, secure machine learning for healthcare.',
+        'My undergraduate studies combined machine learning, embedded systems and computer security. My senior thesis brought these together in a federated learning architecture that lets healthcare models learn from patient data without centralizing it. Outside the classroom, I led an engineering team in Engineers Without Borders.',
       ],
       bullets: [
         'Thesis: GRU-SFL: A Private, Secure, Efficient Machine Learning Architecture for Healthcare; designed a split federated learning architecture with GRU models for privacy-preserving healthcare ML',
@@ -103,10 +103,10 @@ export const site = {
       period: 'Jun – Aug 2023',
       start: '2023-06',
       place: 'Athens, Greece',
-      blurb: 'Real-time vitals alerts for rescue crews wearing AR headsets.',
+      blurb: 'Low-latency messaging and mobile software for an augmented-reality rescue system.',
       stack: ['MQTT', 'Kotlin', 'Android', 'Vuzix HUD'],
       body: [
-        'At the CoNSeRT Lab at the University of West Attica, I built the messaging and mobile software for an augmented-reality system used in rescue operations, where the headsets have little compute and every millisecond counts.',
+        'At the CoNSeRT Lab at the University of West Attica, I worked on an augmented-reality system for rescue operations. The challenge was delivering critical health alerts quickly and securely on headsets with very limited computing power.',
       ],
       bullets: [
         'Engineered a lightweight MQTT messaging network for a resource-constrained AR environment, creating a secure subscription-based notification system for critical vitals thresholds with 250ms end-to-end latency',
@@ -122,9 +122,9 @@ export const site = {
       period: 'Sep 2023 – May 2026',
       start: '2023-09',
       place: 'Princeton, NJ',
-      blurb: 'Labs and tutorials in circuits, logic design and drone control for 75+ students.',
+      blurb: 'Teaching circuits, digital logic and drone control to more than 75 students.',
       body: [
-        'Across three Princeton ECE courses I taught the hands-on side of engineering: circuits, logic design and drone control.',
+        'Over three years I taught across three Princeton ECE courses, guiding students through the hands-on side of engineering, from their first circuits to autonomous drone control.',
       ],
       bullets: [
         'Led labs and tutorials in circuit design, computer logic design, and drone robotics control for 75+ students across three courses',
@@ -140,10 +140,10 @@ export const site = {
       period: 'Dec 2023 – May 2025',
       start: '2023-12',
       place: 'Princeton, NJ',
-      blurb: 'AI sports analytics for female athletes, from the wearable to the models to the app.',
+      blurb: 'An AI sports analytics company for female athletes, spanning wearable hardware, machine learning and apps.',
       stack: ['LLM fine-tuning', 'LSTM', 'React Native', 'TypeScript', 'Supabase'],
       body: [
-        'I co-founded eir to build sports analytics for female athletes, a group most performance tools ignore. The platform pairs a chest-worn wearable with models that track training load, readiness and cycle-related symptoms, and gives coaches a team-wide view.',
+        'Most performance technology is designed around male physiology. I co-founded eir to change that for female athletes, combining a chest-worn wearable with machine learning that tracks training load, readiness and cycle-related symptoms. As COO, I worked across fundraising, partnerships, hardware and software.',
       ],
       bullets: [
         'Founded an AI sports analytics company for female athletes; raised pre-seed funding from multiple sources and established a partnership with USA Rowing to validate the platform through athlete trials',
@@ -165,10 +165,10 @@ export const site = {
       period: 'Jun – Aug 2025',
       start: '2025-06',
       place: 'San Francisco, CA',
-      blurb: 'Zero-to-one financing software helping U.S. manufacturers access flexible capital.',
+      blurb: 'Production financing software that helps U.S. manufacturers access flexible capital.',
       stack: ['React', 'NestJS', 'Prisma', 'AWS Cognito', 'Zustand'],
       body: [
-        'Substrate is an embedded equipment-financing platform for industrial vendors. I worked across its NestJS, Prisma and React monorepo, from database schemas to the screens applicants fill in.',
+        'Substrate offers embedded equipment financing for industrial vendors. I joined during an early growth phase and built across the full stack, from database design and APIs to the interfaces customers use.',
       ],
       bullets: [
         'Led 0-to-1 development of two production applications, credit modules, and three customizable demo platforms helping U.S. manufacturers access $15M+ in flexible financing across 8 early customers',
@@ -184,9 +184,9 @@ export const site = {
       period: 'Sep 2025 – May 2026',
       start: '2025-09',
       place: 'Princeton, NJ',
-      blurb: 'Graduate work in machine learning for medicine and biology.',
+      blurb: 'Graduate study in machine learning, computational biology and security.',
       body: [
-        'My master\'s work applied machine learning to medicine and biology, alongside coursework in reinforcement learning and security.',
+        'My graduate work deepened my foundation in machine learning and applied it to problems in medicine and biology, from automated measurement on X-rays to protein design.',
       ],
       bullets: [
         'Relevant coursework: Reinforcement Learning Theory, Computational Biology, Molecular Modeling Methods, Computer Security',
@@ -206,9 +206,9 @@ export const site = {
       period: 'Sep 2026 – Present',
       start: '2026-09',
       place: 'New York, NY',
-      blurb: 'Labeled threat data and detection rules for ML-based email security.',
+      blurb: 'Training data and detection logic for AI-driven email security.',
       body: [
-        'AegisAI builds agentic email security for Microsoft 365 and Google Workspace. I work on the data and rules behind its threat detection.',
+        'AegisAI builds agentic email security for Microsoft 365 and Google Workspace. I work at the intersection of threat intelligence and machine learning, producing the labeled data that trains its detection models and the rules that back them up.',
       ],
       bullets: [
         'Annotate 5,000+ emails per week with 99.7% accuracy, building labeled training datasets for ML-based email threat detection models',
@@ -226,12 +226,12 @@ export const site = {
       title: 'Massachusetts COVID-19, wave one',
       role: 'Designer and developer',
       kind: 'Side project',
-      blurb: 'An interactive data story on how distance to care shaped who survived the first wave of COVID-19 in Massachusetts.',
+      blurb: 'An interactive data story showing how distance to care shaped survival during the first wave of COVID-19 in Massachusetts.',
       stack: ['React', 'D3', 'TopoJSON', 'Python'],
       live: 'https://hallsterling123.github.io/ma-covid-viz/',
       source: 'https://github.com/HallSterling123/ma-covid-viz',
       body: [
-        'Where you lived decided your odds. This scrolling data story follows 9,106 synthetic COVID-19 patients across all 14 Massachusetts counties from January 20 to March 30, 2020, using Synthea™ synthetic health records.',
+        'This scrolling data story follows 9,106 synthetic COVID-19 patients across all 14 Massachusetts counties from January 20 to March 30, 2020, using Synthea™ synthetic health records. Its central finding is that where patients lived strongly shaped their outcomes.',
         'It runs in three parts. An animated flow map draws every patient visit as an arc from home to provider, showing that routine care reached almost everyone while intensive care sat in a narrow corridor. The second part ties travel distance to survival, and the third maps the conditions patients already had before the pandemic arrived. Python scripts turn about 2.9 million rows of raw CSV data into compact JSON for the browser.',
       ],
       highlights: [
@@ -248,12 +248,12 @@ export const site = {
     {
       slug: 'dtca',
       title: 'Automated DTCA measurement',
-      role: 'ML engineer',
+      role: 'Researcher',
       kind: 'Research',
-      blurb: 'Deep learning that measures the distal tibial component angle directly from ankle X-rays.',
+      blurb: 'A deep learning model that measures a key ankle angle directly from X-rays.',
       stack: ['PyTorch', 'U-Net', 'Computer vision'],
       body: [
-        'Surgeons measure the distal tibial component angle (DTCA) on ankle X-rays by hand. It is slow and varies between readers. This project automates the measurement.',
+        'Surgeons measure the distal tibial component angle (DTCA) on ankle X-rays by hand, which is slow and varies from reader to reader. This project automates the measurement with deep learning.',
         'A multi-task U-Net finds the anatomy and the angle is computed from its output. Along the way I compared spatial configuration networks, stacked hourglass networks, EfficientNet-B0 and nnU-Net, building on earlier work that used weakly supervised landmark detection.',
       ],
       highlights: ['Mean absolute error of 2.15°', '12× better than the baseline', 'Written up as a paper'],
@@ -264,13 +264,13 @@ export const site = {
       title: 'Uncertainty-aware inverse folding',
       role: 'Researcher',
       kind: 'Research',
-      blurb: 'ProteinMPNN conditioned on cryo-EM B-factors, so sequence design knows which parts of a structure to trust.',
+      blurb: 'Teaching a protein design model which parts of a structure to trust, using cryo-EM data.',
       stack: ['ProteinMPNN', 'Cryo-EM', 'PyTorch'],
       body: [
         'Inverse folding models such as ProteinMPNN design a sequence for a fixed backbone, and treat every residue as equally certain. Cryo-EM structures say otherwise: B-factors show which regions are flexible. I conditioned ProteinMPNN on that signal.',
-        'The headline result was negative. An ensemble approach lowered sequence recovery across the board instead of helping on flexible residues, and temperature scaling only matched the single-structure baseline. I rewrote the paper to report that plainly rather than bury it.',
+        'The main result was negative: an ensemble approach lowered sequence recovery overall instead of improving flexible regions, and temperature scaling only matched the single-structure baseline. I reported that result directly, since a clear negative finding is useful to others working on the problem.',
       ],
-      highlights: ['Targeted the MLSB workshop at NeurIPS', 'An honest null result, reported as one'],
+      highlights: ['Prepared for the MLSB workshop at NeurIPS', 'A clearly reported negative result'],
       links: [
         { label: 'ProteinMPNN', href: 'https://github.com/dauparas/ProteinMPNN' },
         { label: 'MLSB workshop', href: 'https://www.mlsb.io/' },
@@ -281,11 +281,11 @@ export const site = {
       title: 'GRU-SFL',
       role: 'Senior thesis',
       kind: 'Thesis',
-      blurb: 'Split federated learning with GRU models, for healthcare ML that never pools patient data in one place.',
+      blurb: 'A privacy-preserving machine learning architecture for healthcare data.',
       stack: ['PyTorch', 'GRU', 'Federated learning'],
       body: [
         'Health data is hard to share, and the best models need a lot of it. GRU-SFL splits a GRU network between clients and a server and combines that with federated learning, so each participant keeps its raw patient data while still contributing to one shared model.',
-        'The thesis designs the architecture and weighs it on privacy, security and efficiency.',
+        'The thesis designs the architecture and evaluates the trade-offs between privacy, security and efficiency.',
       ],
       highlights: ['Princeton BSE thesis in Electrical and Computer Engineering'],
       links: [{ label: 'Princeton BSE', href: '#work-princeton-bse' }],
