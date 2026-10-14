@@ -1,5 +1,6 @@
 import { site, timeline, type Entry } from '../content';
 import { WaveField } from '../components/WaveField';
+import { LineChart } from '../components/LineChart';
 
 export function WorkPage({ slug }: { slug: string }) {
   const isProject = site.projects.some((p) => p.slug === slug);
@@ -41,6 +42,17 @@ export function WorkPage({ slug }: { slug: string }) {
         </div>
       </header>
 
+      {r.stats && r.stats.length > 0 && (
+        <dl className="detail-stats wrap">
+          {r.stats.map((st) => (
+            <div key={st.label}>
+              <dt>{st.label}</dt>
+              <dd>{st.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+
       <div className="detail-body wrap">
         <dl className="detail-facts">
           <div><dt className="tag">Role</dt><dd>{r.role}</dd></div>
@@ -81,6 +93,27 @@ export function WorkPage({ slug }: { slug: string }) {
               <ul className="highlights">{r.highlights.map((h) => <li key={h}>{h}</li>)}</ul>
             </>
           )}
+          {r.sections?.map((sec) => (
+            <section className="detail-section" key={sec.heading}>
+              <h2 className="detail-h2">{sec.heading}</h2>
+              {sec.paragraphs?.map((p, k) => <p key={k}>{p}</p>)}
+              {sec.chart && <LineChart spec={sec.chart} />}
+              {sec.table && (
+                <div className="detail-table-wrap">
+                  <table className="detail-table">
+                    {sec.table.caption && <caption>{sec.table.caption}</caption>}
+                    <thead><tr>{sec.table.head.map((h) => <th scope="col" key={h}>{h}</th>)}</tr></thead>
+                    <tbody>
+                      {sec.table.rows.map((row) => (
+                        <tr key={row[0]}>{row.map((c, k) => (k === 0 ? <th scope="row" key={k}>{c}</th> : <td key={k}>{c}</td>))}</tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {sec.list && <ul className="highlights">{sec.list.map((li) => <li key={li}>{li}</li>)}</ul>}
+            </section>
+          ))}
         </div>
       </div>
 

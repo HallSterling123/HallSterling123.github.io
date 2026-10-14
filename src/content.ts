@@ -22,8 +22,34 @@ export type Entry = {
   highlights?: string[];
   /** Résumé points, shown on the detail page under "What I did". */
   bullets?: string[];
+  /** Optional headline numbers shown as a row near the top of the detail page. */
+  stats?: { value: string; label: string }[];
+  /** Optional extra sections on the detail page, each with a heading and any mix of text, list, table and chart. */
+  sections?: Section[];
   /** Links shown on the detail page. Outside sites open in a new tab; '#work-…' links stay on the site. */
   links?: { label: string; href: string }[];
+};
+
+export type LineChart = {
+  title: string;
+  xLabel: string;
+  yLabel: string;
+  /** x positions, shared by every series */
+  x: number[];
+  xUnit?: string;
+  yUnit?: string;
+  yMax: number;
+  /** null leaves a gap where a point was not run */
+  series: { name: string; values: (number | null)[]; dashed?: boolean }[];
+  caption?: string;
+};
+
+export type Section = {
+  heading: string;
+  paragraphs?: string[];
+  list?: string[];
+  table?: { caption?: string; head: string[]; rows: string[][] };
+  chart?: LineChart;
 };
 
 /** A project also gets outbound buttons on the home page. */
@@ -221,6 +247,95 @@ export const site = {
 
   // The Projects section on the home page. Add `live` and `source` links and they show up as buttons.
   projects: [
+    {
+      slug: 'gcmc-co2',
+      title: 'Humidity-aware CO₂ capture in MOFs',
+      role: 'Researcher and developer',
+      kind: 'Research',
+      blurb: 'A Monte Carlo simulation code, written from scratch, that tests how humidity changes which porous materials capture CO₂ best.',
+      stack: ['Python', 'Numba', 'pyIAST', 'RASPA3'],
+      source: 'https://github.com/HallSterling123/gcmc-humid-co2-capture',
+      body: [
+        'Metal–organic frameworks (MOFs) are porous crystals that can pull CO₂ out of flue gas or air, and computer screening of thousands of them is a standard first step in finding new capture materials. Most of those screens simulate dry gas, but real flue gas and air are humid, and water often binds more strongly than CO₂.',
+        'For Princeton’s CBE 422, Molecular Modeling Methods, I wrote a grand canonical Monte Carlo (GCMC) code in Python and Numba, validated it stage by stage against reference data and the open-source standard RASPA3, and used it to compare two leading MOFs, CALF-20 and Mg-MOF-74, from dry conditions to 90% relative humidity.',
+      ],
+      stats: [
+        { value: '40%', label: 'Humidity at which CALF-20 loses 92% of its CO₂ uptake' },
+        { value: '30%', label: 'Humidity at which Mg-MOF-74 loses 95%' },
+        { value: '|z| ≤ 1.9', label: 'Agreement with RASPA3 on every shared test' },
+        { value: '59', label: 'Automated tests, on about 3,200 lines of Python' },
+      ],
+      sections: [
+        {
+          heading: 'The question',
+          paragraphs: [
+            'Does water reorder the CO₂ capture ranking of leading MOFs, and can classical simulation with generic force fields predict it? The study set four questions: whether humidity changes the ranking, whether Ideal Adsorbed Solution Theory (IAST) can stand in for explicit mixture simulation, where generic force fields are reliable, and whether rankings change between flue gas (about 15% CO₂) and direct air capture (about 400 ppm).',
+          ],
+        },
+        {
+          heading: 'What I built',
+          list: [
+            'A rigid-framework GCMC engine with insertion, deletion, translation, rotation and identity-change moves, and block-averaged statistics',
+            'Ewald electrostatics for charged frameworks and guests, with precomputed energy grids for fast framework–guest interactions',
+            'Peng–Robinson fugacities, Widom insertion for Henry coefficients, and helium void fractions',
+            'Parallel isotherm sweeps, mixture runs and IAST predictions from a command-line tool driven by YAML run files',
+            'Standard models throughout: UFF framework parameters with PACMAN charges, TraPPE CO₂ and N₂, and TIP4P/2005 water',
+          ],
+        },
+        {
+          heading: 'Validation',
+          paragraphs: [
+            'Each part of the code was checked before it was used. On identical inputs it matches RASPA3 within statistical error everywhere tested, and in the silicalite benchmark it ran four to six times faster.',
+          ],
+          table: {
+            head: ['Check', 'Result'],
+            rows: [
+              ['Ideal gas', 'Mean loading 10.008 ± 0.012 against an exact 10'],
+              ['Ewald sum', 'Matches the NaCl Madelung constant to 1e-7'],
+              ['Bulk N₂ vs NIST', 'Within 2% up to 20 MPa'],
+              ['Silicalite vs RASPA3', 'CO₂ and N₂ Henry coefficients within 0.6%'],
+              ['Charged frameworks vs RASPA3', 'Silicalite and IRMOF-1 agree, |z| ≤ 1.3'],
+              ['Water and humid CALF-20 vs RASPA3', 'Agree, |z| ≤ 1.9'],
+            ],
+          },
+        },
+        {
+          heading: 'Findings',
+          chart: {
+            title: 'Share of dry CO₂ uptake kept in humid flue gas',
+            xLabel: 'Relative humidity',
+            yLabel: 'CO₂ kept',
+            x: [0, 5, 10, 20, 30, 40, 50, 60, 75, 90],
+            xUnit: '%',
+            yUnit: '%',
+            yMax: 100,
+            series: [
+              { name: 'CALF-20', values: [100, 97.9, 97.5, 92.6, 69.1, 7.6, 5.8, 2.8, 0, 0] },
+              { name: 'Mg-MOF-74', values: [100, 100.2, 100.1, 92.8, 4.9, null, null, null, null, null], dashed: true },
+            ],
+            caption: '298 K, 1 bar, 15% CO₂ and 85% N₂ on a dry basis. Mg-MOF-74 runs above 30% humidity were not completed.',
+          },
+          list: [
+            'Water does not gradually reorder the ranking; each material collapses at its own humidity, when water condenses in its pores. CALF-20 leads at every humidity tested.',
+            'CALF-20’s CO₂/N₂ selectivity holds at about 190 to 200 up to 30% humidity.',
+            'IAST works for dry gas but fails with water in both directions: it overpredicts water 5 to 15 times at low humidity and overpredicts CO₂ 8 to 12 times at 40 to 60%.',
+            'For direct air capture, CALF-20 leads by about 5 times dry, and humidity hits it the same way as in flue gas. The water threshold, not the CO₂ concentration, sets the operating window.',
+          ],
+        },
+        {
+          heading: 'Where the model holds, and where it does not',
+          paragraphs: [
+            'The simulated collapse of CALF-20 above about 40% humidity matches published work. The model is less accurate at low humidity: experiments show CALF-20 losing about 30% of its CO₂ uptake at 20% humidity, where the model loses 7%, most likely because the frameworks are treated as rigid. For Mg-MOF-74, the generic force field gets the 1 bar uptake within about 4% but badly underbinds CO₂ at the open magnesium sites, a known limit of this class of model that the study measures rather than hides.',
+          ],
+        },
+      ],
+      links: [
+        { label: 'Source code', href: 'https://github.com/HallSterling123/gcmc-humid-co2-capture' },
+        { label: 'Full results', href: 'https://github.com/HallSterling123/gcmc-humid-co2-capture/blob/main/analysis/README.md' },
+        { label: 'Validation details', href: 'https://github.com/HallSterling123/gcmc-humid-co2-capture/blob/main/validation/results/README.md' },
+        { label: 'RASPA3', href: 'https://github.com/iRASPA/RASPA3' },
+      ],
+    },
     {
       slug: 'ma-covid',
       title: 'Massachusetts COVID-19, wave one',
