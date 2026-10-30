@@ -80,8 +80,6 @@ export const site = {
     replyTime: 'Usually within two business days.',
   },
 
-  // Your résumé lives at public/resume/Hall_Sterling.pdf. Replace that file to update it.
-  resume: { label: 'Résumé (PDF)', file: 'resume/Hall_Sterling.pdf' },
 
   // Booking calendar on the contact page. Paste your Calendly event link here,
   // e.g. 'https://calendly.com/sterlingahall/30min'. Leave it empty to hide the calendar.

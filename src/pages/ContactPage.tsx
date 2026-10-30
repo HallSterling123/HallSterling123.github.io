@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { site } from '../content';
 import { Marquee } from '../components/Marquee';
-import { Calendly, asset } from '../components/Calendly';
+import { Calendly } from '../components/Calendly';
 
 function CopyEmail() {
   const [copied, setCopied] = useState(false);
@@ -32,7 +32,6 @@ export function ContactPage() {
           <h1 id="contact-title" className="tag">Contact</h1>
           <p className="contact-lede">{site.contact.lede}</p>
           <CopyEmail />
-          <a className="btn-resume" href={asset(site.resume.file)} target="_blank" rel="noreferrer">{site.resume.label}</a>
           <ul className="links">
             {site.links.map((l) => (
               <li key={l.label}><a href={l.href} target="_blank" rel="noreferrer">{l.label}</a></li>

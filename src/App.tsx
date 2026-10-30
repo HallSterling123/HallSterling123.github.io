@@ -9,7 +9,6 @@ import { WorkPage } from './pages/WorkPage';
 import { parse, useRoute } from './router';
 import { navigate } from './transition';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { asset } from './components/Calendly';
 import { Wormhole } from './components/Wormhole';
 import { ContactPage } from './pages/ContactPage';
 
@@ -138,9 +137,6 @@ export default function App() {
           <h2 id="about-title" className="tag about-label">About</h2>
           <div className="about-body">
             {site.about.map((p, i) => <p key={i}>{p}</p>)}
-            <p className="about-resume">
-              <a className="btn-resume" href={asset(site.resume.file)} target="_blank" rel="noreferrer">{site.resume.label}</a>
-            </p>
 
             <h3 className="tag now-label">Now</h3>
             <dl className="now">
