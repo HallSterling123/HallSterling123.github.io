@@ -173,7 +173,7 @@ export const site = {
       ],
       bullets: [
         'Founded an AI sports analytics company for female athletes; raised pre-seed funding from multiple sources and established a partnership with USA Rowing to validate the platform through athlete trials',
-        'Fine-tuned an LLM with Supervised Fine-Tuning (SFT) and QLoRA on a curated dataset, and built an LSTM neural network to predict menstrual cycle symptoms and performance trends from biosignal data',
+        'Fine-tuned an LLM with LoRA on a curated dataset, and built an LSTM neural network to predict menstrual cycle symptoms and performance trends from biosignal data',
         'Led design and rapid prototyping of a chest-worn wearable based on Polar H10; trials showed increased comfort and equivalent accuracy to established market alternatives',
         'Built mobile and web applications using React Native, TypeScript, and Supabase',
         'Selected for Keller Center\u2019s eLab Summer Accelerator program (Summer 2024)',
@@ -371,7 +371,7 @@ export const site = {
         'Surgeons measure the distal tibial component angle (DTCA) on ankle X-rays by hand, which is slow and varies from reader to reader. This project automates the measurement with deep learning.',
         'A multi-task U-Net finds the anatomy and the angle is computed from its output. Along the way I compared spatial configuration networks, stacked hourglass networks, EfficientNet-B0 and nnU-Net, building on earlier work that used weakly supervised landmark detection.',
       ],
-      highlights: ['Mean absolute error of 2.15°', '12× better than the baseline', 'Written up as a paper'],
+      highlights: ['Mean absolute error of 2.15°', '12× better than the baseline', 'Completed as a graduate course project'],
       links: [{ label: 'Princeton MS', href: '#work-princeton-ms' }],
     },
     {
@@ -385,10 +385,9 @@ export const site = {
         'Inverse folding models such as ProteinMPNN design a sequence for a fixed backbone, and treat every residue as equally certain. Cryo-EM structures say otherwise: B-factors show which regions are flexible. I conditioned ProteinMPNN on that signal.',
         'The main result was negative: an ensemble approach lowered sequence recovery overall instead of improving flexible regions, and temperature scaling only matched the single-structure baseline. I reported that result directly, since a clear negative finding is useful to others working on the problem.',
       ],
-      highlights: ['Prepared for the MLSB workshop at NeurIPS', 'A clearly reported negative result'],
+      highlights: ['Completed as a graduate course project', 'A clearly reported negative result'],
       links: [
         { label: 'ProteinMPNN', href: 'https://github.com/dauparas/ProteinMPNN' },
-        { label: 'MLSB workshop', href: 'https://www.mlsb.io/' },
       ],
     },
     {
